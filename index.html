@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" type="text/css" href="stylesheet.css" media="screen" />
+
+    <script>
+            function startTime() {
+              var today = new Date();
+              var h = today.getHours();
+              var m = today.getMinutes();
+              var s = today.getSeconds();
+              m = checkTime(m);
+              s = checkTime(s);
+              document.getElementById('txt').innerHTML =
+              h + ":" + m + ":" + s;
+              var t = setTimeout(startTime, 500);
+            }
+            function checkTime(i) {
+              if (i < 10) {i = "0" + i};  // add zero in front of numbers < 10
+              return i;
+            }
+            </script>
+            </head>
+            
+            <body onload="startTime()">
+            
+                    
+                </head>
+                <body> 
+                    <img src="https://img.elo7.com.br/product/zoom/2A5B1B1/nicho-em-formato-de-retangulo-na-cor-amarelo-quartodebebe.jpg" alt="">
+                    <div id="txt"></div>
+    
+</body>
+</html>
