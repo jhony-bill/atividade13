@@ -1,38 +1,107 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-    <link rel="stylesheet" type="text/css" href="stylesheet.css" media="screen" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>relogio</title>relogio
 
-    <script>
-            function startTime() {
-              var today = new Date();
-              var h = today.getHours();
-              var m = today.getMinutes();
-              var s = today.getSeconds();
-              m = checkTime(m);
-              s = checkTime(s);
-              document.getElementById('txt').innerHTML =
-              h + ":" + m + ":" + s;
-              var t = setTimeout(startTime, 500);
-            }
-            function checkTime(i) {
-              if (i < 10) {i = "0" + i};  // add zero in front of numbers < 10
-              return i;
-            }
-            </script>
-            </head>
-            
-            <body onload="startTime()">
-            
-                    
-                </head>
-                <body> 
-                    <img src="https://img.elo7.com.br/product/zoom/2A5B1B1/nicho-em-formato-de-retangulo-na-cor-amarelo-quartodebebe.jpg" alt="">
-                    <div id="txt"></div>
-    
+  <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+  <script src="http://momentjs.com/downloads/moment.js" type="application/javascript"></script>
+   <script src="http://momentjs.com/downloads/moment-timezone-with-data.js" type="application/javascript"></script>
+
+<style>
+
+.hero-circle {
+    width: 600px;
+    height: 600px;
+    position: relative;
+    border: 8px solid #fff;
+    border-radius: 50%;
+    box-shadow: 0 1px 8px rgba(34,34,34,0.3),inset 0 1px 8px rgba(34,34,34,0.3);
+}
+
+.hero-hour {
+    width: 0;
+    height: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin: -4px 0 -4px -25%;
+    padding: 4px 0 4px 25%;
+    background: #fff;
+    transform-origin: 100% 50%;
+    border-radius: 4px 0 0 4px;
+}
+.hero-minute {
+    width: 0;
+    height: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin: -40% -3px 0;
+    padding: 40% 3px 0;
+    background: #fff;
+    transform-origin: 50% 100%;
+    border-radius: 3px 3px 0 0;
+}
+
+.hero-second {
+    width: 0;
+    height: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin: -40% -1px 0 0;
+    padding: 40% 1px 0;
+    background: #fff;
+    transform-origin: 50% 100%;
+}
+
+
+
+
+
+body {
+  background-color: red ;
+}
+
+</style>
+
+</head>
+<body>
+  
+  <div class="hero-circle">
+    <div class="hero-face">
+        <div id="hour" class="hero-hour"></div>
+        <div id="minute" class="hero-minute"></div>
+        <div id="second" class="hero-second"></div>
+    </div>
+</div>
+
+
+<script>
+
+function updateClock(){
+    var now = moment();
+    now.tz("America/Sao_Paulo");
+    var second = now.seconds() * 6;
+    var minute = now.minutes() * 6 + second / 60;
+    var hour = ((now.hours() % 12) / 12) * 360 + 90 + minute / 12;
+    $('#hour').css("transform", "rotate(" + hour + "deg)");
+    $('#minute').css("transform", "rotate(" + minute + "deg)");
+    $('#second').css("transform", "rotate(" + second + "deg)");
+}
+
+function timedUpdate () {
+    updateClock();
+    setTimeout(timedUpdate, 1000);
+}
+
+timedUpdate();
+
+
+</script>
+
 </body>
 </html>
